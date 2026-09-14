@@ -1,0 +1,22 @@
+# Run output (verdicts, reports) is regenerated — evidence, not source.
+verdicts/
+# Never commit anything resembling a key.
+*.key
+.env
+
+# Laptop-only demo/provisioning scaffolding — stays local, never published.
+live/
+tools/
+
+# GPU deploy config (has ids, and points at the private key)
+*.env
+
+# Python packaging build artifact
+*.egg-info/
+
+# Byte-compiled artifacts
+__pycache__/
+build/
+# Calibration run output (regenerated evidence, not source)
+calibration/*.jsonl
+!calibration/calibration_pools.jsonl

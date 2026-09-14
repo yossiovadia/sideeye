@@ -1,0 +1,6 @@
+{"type":"mode","mode":"default"}
+{"type":"file-history-snapshot","snapshot":{}}
+{"type":"user","message":{"role":"user","content":[{"type":"text","text":"<local-command-stdout>Set model to Fable 5</local-command-stdout>"}]}}
+{"type":"user","message":{"role":"user","content":[{"type":"text","text":"write a Go function to add two ints"}]}}
+{"type":"assistant","message":{"role":"assistant","model":"glm-5-2-fp8","content":[{"type":"thinking","thinking":"The user wants a simple add function."},{"type":"text","text":"func Add(a, b int) int { return a + b }"}],"usage":{"input_tokens":1200,"output_tokens":40}}}
+{"type":"user","message":{"role":"user","content":[{"type":"tool_result","tool_use_id":"t1","content":[{"type":"text","text":"ok"}]}]}}

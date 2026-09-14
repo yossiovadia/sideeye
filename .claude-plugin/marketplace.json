@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "sideeye",
+  "description": "Side-Eye — on-demand session review by a strong Claude judge (draft cheap, review expensive)",
+  "owner": { "name": "Yossi Ovadia" },
+  "plugins": [
+    {
+      "name": "sideeye",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/yossiovadia/sideeye.git"
+      },
+      "description": "Session review skill + sideeye CLI engine: /sideeye:ask (--all review, free-text opinion, --validate setup check).",
+      "version": "0.3.0"
+    }
+  ]
+}

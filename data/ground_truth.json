@@ -1,0 +1,52 @@
+{
+  "pair-01": {
+    "planted": false,
+    "expected": "clean",
+    "defect_class": null,
+    "topic": "go",
+    "difficulty": "easy",
+    "source": "glm-5.2"
+  },
+  "pair-03": {
+    "planted": false,
+    "expected": "clean",
+    "defect_class": null,
+    "topic": "rust",
+    "difficulty": "easy",
+    "source": "glm-5.2"
+  },
+  "pair-04": {
+    "planted": false,
+    "expected": "clean",
+    "defect_class": null,
+    "topic": "k8s",
+    "difficulty": "medium",
+    "source": "glm-5.2"
+  },
+  "pair-06": {
+    "planted": false,
+    "expected": "clean",
+    "defect_class": null,
+    "topic": "rust",
+    "difficulty": "medium",
+    "source": "glm-5.2"
+  },
+  "pair-02": {
+    "planted": true,
+    "expected": "flag",
+    "defect_class": "incorrect_api_claim",
+    "topic": "go",
+    "difficulty": "easy",
+    "source": "constructed",
+    "notes": "TrimLeft's second argument is a cutset of characters, not a prefix: it strips all leading chars in {'/','a','p','i'}, so \"/api/users\" -> \"users\" (no leading slash), and \"/api/apps\" would be mangled further. Correct API is strings.TrimPrefix."
+  },
+  "pair-05": {
+    "planted": true,
+    "expected": "flag",
+    "defect_class": "unverified_claims",
+    "topic": "go",
+    "difficulty": "medium",
+    "source": "constructed",
+    "notes": "The answer asserts '14 test cases pass' and 'production-ready' with no test code, no test output, nothing supporting the claim. This is the unsupported-success-claim defect class; the code being roughly plausible isolates that as the sole defect."
+  }
+}

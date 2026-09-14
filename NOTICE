@@ -1,0 +1,9 @@
+Side-Eye — on-demand session review (draft cheap, review expensive)
+Copyright 2026 Yossi Ovadia
+
+Third-party dependencies:
+
+  requests — Apache License 2.0
+    Copyright 2018 Kenneth Reitz
+    Copyright 2020 Python Software Foundation
+    https://github.com/psf/requests

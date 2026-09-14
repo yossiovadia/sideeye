@@ -1,0 +1,31 @@
+# Packaging for the `sideeye` tool:
+#   uv tool install .   |  pipx install .   |  pip install -e .   (development)
+# yields a `sideeye` command:  sideeye review | sideeye advise
+#
+# The bundled rubric/*.md ship as package data, so non-editable (wheel) installs
+# resolve them via __file__ just like the editable/checkout mode does.
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sideeye"
+# Keep in lockstep with .claude-plugin/plugin.json + marketplace.json; the
+# release flow bumps all three.
+version = "0.3.0"
+description = "Side-Eye — on-demand session review (draft cheap, review expensive)"
+requires-python = ">=3.10"
+dependencies = ["requests"]
+
+[project.scripts]
+sideeye = "sideeye.cli:main"
+
+[tool.setuptools]
+# This pyproject lives inside the package dir, so map the `sideeye` package to "."
+package-dir = { "sideeye" = "." }
+packages = ["sideeye", "sideeye.judge", "sideeye.adapters"]
+
+[tool.setuptools.package-data]
+# Rubrics are read at runtime relative to the package dir (REPO / "rubric" / …);
+# without this, wheel installs would ship the code but drop the grading criteria.
+sideeye = ["rubric/*.md"]
