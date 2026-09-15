@@ -1,6 +1,6 @@
 ---
 name: Ask
-description: Ask the expensive Side-Eye judge about THIS session. --all = full sighted review, --turn N = recent exchanges, free text = scoped opinion, --validate = $0 setup check. User-invoked; spends real money except --validate and --help.
+description: Ask the expensive Side-Eye judge about THIS session. --all = full sighted review, --turn N = recent exchanges, free text = scoped opinion, --validate = free setup check. User-invoked; spends real money except --validate and --help.
 disable-model-invocation: true
 allowed-tools: Bash(sideeye review *), Bash(sideeye advise *), Bash(sideeye route), Bash("$HOME/.local/bin/sideeye" review *), Bash("$HOME/.local/bin/sideeye" advise *), Bash("$HOME/.local/bin/sideeye" route), Bash(command -v sideeye*), Bash(uv tool install *), Bash(pipx install *), Bash(python3 -m pip install *)
 ---
@@ -16,7 +16,7 @@ they want checked; the judge's answer comes back verbatim.
 | User typed | Mode | Command to run |
 |---|---|---|
 | nothing, or `--help` / `help` | usage | print the Usage section below and stop (no spend) |
-| `--validate` (with or without other text) | setup check | `sideeye route` — spends $0 |
+| `--validate` (with or without other text) | setup check | `sideeye route` (free) |
 | `--all` | full review | `sideeye review --current --yes` |
 | anything else (free text, `--turn N`) | scoped opinion | `sideeye advise --current --yes --question "<their text>"` |
 
@@ -86,13 +86,13 @@ Then:
 /sideeye:ask — ask the expensive model (the Side-Eye judge) about this session
 
   /sideeye:ask --validate               free setup check: is the judge route
-                                        configured and unblocked? ($0)
+                                        configured and unblocked? (free)
   /sideeye:ask --help                    this text (no spend)
   /sideeye:ask <question>               the judge's opinion on your question,
-                                        scoped to recent work (~$0.02–$1)
+                                        scoped to recent work (~2¢–$1)
   /sideeye:ask --turn 3 <question>      same, over the last 3 exchanges
   /sideeye:ask --all                    full sighted review of the whole session
-                                        + code diff (median ~$0.75, up to ~$3.50)
+                                        + code diff (median ~75¢, up to ~$3.50)
 
   extra flags: --model fable|opus|sonnet|haiku · --no-code (skip the diff)
                · --max-cost N (abort above this ceiling)
