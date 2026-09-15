@@ -96,12 +96,26 @@ def latest_session(client, scope="all"):
 def resolve_current_session(client):
     """Best-effort "the session I'm in", robust to a drifted shell cwd.
 
-    Tries the current project (cwd) first — precise when the shell is actually in
-    the session's dir. Then walks up parent directories (like git finding .git),
-    so running from sideeye/calibration still finds the praxis-ai project session.
-    Only falls back to "globally most recent" if no ancestor matches.
+    When Claude Code's own session ID is exported (CLAUDE_CODE_SESSION_ID, set
+    for skill/tool shell calls), use it directly — session ids are UUIDs, so a
+    global lookup is unambiguous, deterministic, and immune to a sibling
+    session in the same project dir having written more recently (the silent
+    wrong-session race). Otherwise: try the current project (cwd) first —
+    precise when the shell is actually in the session's dir. Then walk up
+    parent directories (like git finding .git), so running from
+    sideeye/calibration still finds the praxis-ai project session. Only falls
+    back to "globally most recent" if no ancestor matches.
 
-    Returns (path_or_None, fell_back_bool) so the caller can note the fallback."""
+    Returns (path_or_None, fell_back_bool) so the caller can note the fallback.
+    Note: if the env id is set but its transcript is not on disk, resolution
+    silently degrades to the mtime heuristic — the CALLER should surface that
+    (it knows the env id and the resolved path)."""
+    if client == "claude":
+        env_id = os.environ.get("CLAUDE_CODE_SESSION_ID")
+        if env_id:
+            hits = sorted(CLAUDE_DIR.glob(f"*/{env_id}.jsonl")) if CLAUDE_DIR.exists() else []
+            if hits:
+                return hits[0], False
     s = latest_session(client, scope="cwd")
     if s:
         return s, False

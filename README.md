@@ -67,7 +67,7 @@ Both spend real money. Observed on 20 dogfood reviews: `advise` ≈ $0.02–$1,
 `review`, Fable 5 for `advise`; `--model fable|opus|sonnet|haiku` to choose,
 `--max-cost N` as a ceiling).
 
-The engine is still POC-grade in places, but it runs for real: 152 offline
+The engine is still POC-grade in places, but it runs for real: 156 offline
 tests, and the capture → judge → verdict → cost pipeline is verified on real
 sessions. It is plain Python glue — deliberately: the perf-critical hot path is
 the gateway (Rust/praxis); the judge worker is I/O-bound (one multi-second LLM
@@ -95,7 +95,7 @@ sideeye/
   sampler.py                     Phase C: RANDOM stream — scan rollouts, judge, verdicts/sampled.jsonl
   escalate.py                    Phase C: HUMAN stream — "ask the expensive model", verdicts/escalated.jsonl
   cost_report.py                 the money story: counterfactual savings + quality, CLI + HTML
-  tests/                         unit tests (no network): 152 passing
+  tests/                         unit tests (no network): 156 passing
   data/                          seed_pairs, hard_tasks, ground_truth (fixtures)
   verdicts/                      run output (gitignored)
 ```
@@ -118,7 +118,7 @@ options are just adapters into one pipe:
 ## Phase B — pair judging (falsification gate) — DONE
 
 ```bash
-pytest tests -q                                         # 152 tests, no network
+pytest tests -q                                         # 156 tests, no network
 python -m sideeye.run_judge --pairs data/seed_pairs.jsonl \
     --ground-truth data/ground_truth.json               # needs a judge route
 ```

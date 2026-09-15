@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import pathlib
 import re
 import sys
@@ -108,6 +109,10 @@ def main():
         if fell_back and rollout:
             print(f"(cwd has no {args.client} session; using the most recently "
                   "active session instead)")
+        env_id = os.environ.get("CLAUDE_CODE_SESSION_ID")
+        if env_id and rollout and rollout.stem != env_id:
+            print(f"(harness session {env_id[:8]} not found on disk; judging the "
+                  "most recently active session instead)")
     if not rollout or not rollout.exists():
         fail(f"no {args.client} session found (run from the session's project dir, "
              "or pass --rollout / --all-projects)")
@@ -149,6 +154,7 @@ def main():
              f"({input_tokens:,} input tokens). Re-run with --max-cost to override.")
 
     print("sideeye · advice mode")
+    print(f"  session: {transcript['session_id'][:24]}")
     scope = "last exchange" if args.turns <= 1 else f"last {args.turns} exchanges"
     code_note = f" + {n_code_files} file(s) diff" if n_code_files else ""
     print(f"  packet: {scope}{code_note} ({input_tokens:,} tokens{'' if exact else ', est'}) "

@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import pathlib
 import sys
 import time
@@ -262,6 +263,10 @@ def main():
         if fell_back and rollout:
             print(f"(cwd has no {args.client} session; using the most recently "
                   "active session instead)")
+        env_id = os.environ.get("CLAUDE_CODE_SESSION_ID")
+        if env_id and rollout and rollout.stem != env_id:
+            print(f"(harness session {env_id[:8]} not found on disk; judging the "
+                  "most recently active session instead)")
     if not rollout or not rollout.exists():
         if scope == "cwd":
             fail(f"no {args.client} session in this project "
