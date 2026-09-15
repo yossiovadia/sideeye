@@ -65,9 +65,7 @@ sideeye route                      # must say "verdict: OK"
 Both spend real money. Observed on 20 dogfood reviews: `advise` ≈ $0.02–$1,
 `review` ≈ median $0.75, up to ~$3.50 on big sessions (defaults: Opus 4.8 for
 `review`, Fable 5 for `advise`; `--model fable|opus|sonnet|haiku` to choose,
-`--max-cost N` as a ceiling). The repo is currently private — first-time users
-need GitHub read access to `yossiovadia/sideeye` for the marketplace add and
-the git install.
+`--max-cost N` as a ceiling).
 
 The engine is still POC-grade in places, but it runs for real: 152 offline
 tests, and the capture → judge → verdict → cost pipeline is verified on real
